@@ -1,0 +1,44 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import portrait from "../assets/alex-danvy-terminator.png";
+---
+
+<BaseLayout title="About">
+  <article data-pagefind-body>
+    <h1>About</h1>
+    <Image src={portrait} alt="Alex Danvy" />
+    <p>
+      I’m Alex Danvy, a French geek, father of a little ninja and a graceful
+      princess, passionate about software, computers and entrepreneurship.
+      Expect to read some technical stuff but not limited to. I might talk about
+      food or way of life (Hey, I’m French after all). I plan to write most
+      articles in English to share with the broadest audience and train my
+      English (I’ll do my best to respect the English language). All opinions are
+      mine.
+    </p>
+    <p>
+      I spent 2 years in a “2 guys” IT company, 15 years working at <a
+        href="https://ebp.com">EBP</a
+      > mainly in the development team, 11 years at <a
+        href="https://microsoft.com">Microsoft</a
+      > as an evangelist (Development tools, cloud and Internet of Things) and now
+      entrepreneur at <a href="https://altoviz.com">Altoviz</a> making an awesome
+      invoicing and accouting app for small businesses and freelancers.
+    </p>
+    <p>
+      I’ve been a speaker at numerous events in France, US, Canada and North
+      Africa (up to 3500 attendees). I will speak freely but don’t expect to
+      find trolls or bashing about anybody/anything here. I love to share my
+      enthusiasm and improvement ideas. It’s often easier to break than to build.
+      I’m a builder. It’s easier criticize than to create. I’m a creator.
+    </p>
+    <p>
+      I will be thankful if you give me some feedback through comments about the
+      content and/or the form of articles you read here.
+    </p>
+    <p>Feel free to share your love and my articles.</p>
+    <p>Thanks.</p>
+    <p>Alex</p>
+  </article>
+</BaseLayout>

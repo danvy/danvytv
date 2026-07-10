@@ -1,0 +1,13 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SocialIcons from "../components/SocialIcons.astro";
+import { HOME_INFO } from "../consts";
+---
+
+<BaseLayout>
+  <section class="home-info">
+    <h1>{HOME_INFO.title}</h1>
+    <p>{HOME_INFO.content}</p>
+    <SocialIcons />
+  </section>
+</BaseLayout>
