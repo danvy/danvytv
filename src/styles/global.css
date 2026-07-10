@@ -117,12 +117,25 @@ img {
   padding: 0;
 }
 
+/* Stack the label with a hidden bold copy so switching to bold for the
+   active item reserves the wider width and never shifts the layout. */
 .nav-links a {
   color: var(--primary);
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.nav-links a::after {
+  content: attr(data-title);
+  font-weight: 700;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .nav-links a[aria-current="page"] {
-  text-decoration: underline;
+  font-weight: 700;
 }
 
 .theme-toggle {
@@ -133,6 +146,8 @@ img {
   font-size: 18px;
   padding: 4px;
   line-height: 1;
+  /* Show the theme glyph in greyscale rather than full color. */
+  filter: grayscale(1);
 }
 
 /* Main */
@@ -172,6 +187,38 @@ main {
   width: 26px;
   height: 26px;
   fill: currentColor;
+  transition: fill 0.15s ease;
+}
+
+/* On hover, tint each icon with its official brand color. */
+.social-icons .si-linkedin:hover svg {
+  fill: #0a66c2;
+}
+.social-icons .si-x:hover svg {
+  fill: #000;
+}
+.social-icons .si-facebook:hover svg {
+  fill: #1877f2;
+}
+.social-icons .si-github:hover svg {
+  fill: #181717;
+}
+
+/* X and GitHub are near-black brands; lift them so they stay visible when
+   hovered on the dark theme. */
+:root[data-theme="dark"] .social-icons .si-x:hover svg {
+  fill: #fff;
+}
+:root[data-theme="dark"] .social-icons .si-github:hover svg {
+  fill: #f0f6fc;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .social-icons .si-x:hover svg {
+    fill: #fff;
+  }
+  :root:not([data-theme="light"]) .social-icons .si-github:hover svg {
+    fill: #f0f6fc;
+  }
 }
 
 /* Post list */

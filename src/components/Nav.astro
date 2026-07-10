@@ -18,6 +18,7 @@ function isCurrent(url: string): boolean {
         <li>
           <a
             href={item.url}
+            data-title={item.name}
             aria-current={isCurrent(item.url) ? "page" : undefined}
           >
             {item.name}

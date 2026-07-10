@@ -25,6 +25,7 @@ function viewBox(name: string): string {
     SOCIAL.map((s) => (
       <a
         href={s.url}
+        class={`si-${s.name}`}
         target="_blank"
         rel="noopener noreferrer me"
         aria-label={s.name}

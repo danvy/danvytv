@@ -19,7 +19,7 @@ export type NavItem = { name: string; url: string };
 
 export const NAV: NavItem[] = [
   { name: "Home", url: "/" },
-  { name: "Posts", url: "/posts" },
+  { name: "Blog", url: "/blog" },
   { name: "Links", url: "/links" },
   { name: "About", url: "/about" },
   { name: "Search", url: "/search" },
