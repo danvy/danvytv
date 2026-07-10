@@ -1,1 +1,3 @@
 workflow: GitHubFlow/v1
+# Base version used until the first release tag exists on the repo.
+next-version: 1.0.0
