@@ -18,13 +18,61 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # Calculate semver from Git history and tags
+  version:
+    name: Calculate version
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.gv.outputs.majorMinorPatch }}
+      major: ${{ steps.gv.outputs.major }}
+      minor: ${{ steps.gv.outputs.minor }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Install GitVersion
+        uses: gittools/actions/gitversion/setup@v4.5.0
+        with:
+          versionSpec: "6.7.x"
+
+      - name: Determine version
+        id: gv
+        uses: gittools/actions/gitversion/execute@v4.5.0
+
+      - name: Log version
+        run: |
+          echo "::notice title=Version::${{ steps.gv.outputs.majorMinorPatch }}"
+          echo "## Version ${{ steps.gv.outputs.majorMinorPatch }}" >> $GITHUB_STEP_SUMMARY
+
   build:
+    needs: version
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v7
       - name: Install, build, and upload your site
         uses: withastro/action@v6
+
+  # Tag the commit once version is known and the build succeeds
+  tag:
+    name: Tag release
+    runs-on: ubuntu-latest
+    needs: [version, build]
+    if: github.ref == 'refs/heads/main'
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Push tag
+        run: |
+          git tag v${{ needs.version.outputs.tag }}
+          git push origin v${{ needs.version.outputs.tag }}
 
   deploy:
     needs: build
