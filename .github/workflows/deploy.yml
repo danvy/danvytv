@@ -71,8 +71,13 @@ jobs:
 
       - name: Push tag
         run: |
-          git tag v${{ needs.version.outputs.tag }}
-          git push origin v${{ needs.version.outputs.tag }}
+          TAG="v${{ needs.version.outputs.tag }}"
+          if git ls-remote --exit-code --tags origin "refs/tags/$TAG" >/dev/null 2>&1; then
+            echo "Tag $TAG already exists on origin — skipping."
+          else
+            git tag "$TAG"
+            git push origin "$TAG"
+          fi
 
   deploy:
     needs: build

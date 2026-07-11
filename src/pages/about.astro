@@ -1,13 +1,21 @@
 ---
 import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import portrait from "../assets/alex-danvy-terminator.png";
+import portrait from "../assets/alex-danvy-terminator.webp";
 ---
 
-<BaseLayout title="About">
+<BaseLayout title="About" description="A brief introduction about myself">
   <article data-pagefind-body>
     <h1>About</h1>
-    <Image src={portrait} alt="Alex Danvy" />
+    <figure>
+      <Image
+        src={portrait}
+        alt="Alex Danvy during a Microsoft TechDays conference in Paris"
+      />
+      <figcaption>
+        Microsoft TechDays conference in Paris. Photo by Michel Rousseau
+      </figcaption>
+    </figure>
     <p>
       I’m Alex Danvy, a French geek, father of a little ninja and a graceful
       princess, passionate about software, computers and entrepreneurship.

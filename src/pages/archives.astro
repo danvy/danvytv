@@ -1,0 +1,54 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const posts = (await getCollection("posts")).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+
+// Group by year, then by month, newest first.
+const years = new Map<number, Map<number, typeof posts>>();
+for (const post of posts) {
+  const year = post.data.date.getFullYear();
+  const month = post.data.date.getMonth();
+  if (!years.has(year)) years.set(year, new Map());
+  const months = years.get(year)!;
+  if (!months.has(month)) months.set(month, []);
+  months.get(month)!.push(post);
+}
+
+const monthFmt = new Intl.DateTimeFormat("en-US", { month: "long" });
+const dayFmt = new Intl.DateTimeFormat("en-US", {
+  month: "short",
+  day: "numeric",
+});
+---
+
+<BaseLayout title="Archives" description="Every post, by date">
+  <h1>Archives</h1>
+  {
+    [...years.entries()].map(([year, months]) => (
+      <section class="archive-year">
+        <h2>{year}</h2>
+        {[...months.entries()].map(([month, monthPosts]) => (
+          <section class="archive-month">
+            <h3>
+              {monthFmt.format(new Date(year, month))}
+              <span class="archive-count">{monthPosts.length}</span>
+            </h3>
+            <ul>
+              {monthPosts.map((post) => (
+                <li>
+                  <time datetime={post.data.date.toISOString()}>
+                    {dayFmt.format(post.data.date)}
+                  </time>
+                  <a href={`/blog/${post.id}`}>{post.data.title}</a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))}
+      </section>
+    ))
+  }
+</BaseLayout>

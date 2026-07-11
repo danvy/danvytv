@@ -156,17 +156,29 @@ main {
   padding-block: var(--gap);
 }
 
-/* Home hero */
-.home-info {
+/* Home hero (PaperMod "profile mode": logo, name, subtitle, socials) */
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
   padding-block: 60px 20px;
 }
 
-.home-info h1 {
-  margin: 0 0 8px;
+.profile-logo {
+  width: 120px;
+  height: 120px;
+  /* The logo is a rounded square already — don't let the global img rule
+     round it a second time. */
+  border-radius: 0;
+}
+
+.profile h1 {
+  margin: 16px 0 8px;
   font-size: 40px;
 }
 
-.home-info p {
+.profile-subtitle {
   margin: 0;
   color: var(--secondary);
 }
@@ -176,6 +188,11 @@ main {
   display: flex;
   gap: 16px;
   margin-top: 24px;
+}
+
+.profile .social-icons,
+.footer .social-icons {
+  justify-content: center;
 }
 
 .social-icons a {
@@ -199,6 +216,9 @@ main {
 }
 .social-icons .si-facebook:hover svg {
   fill: #1877f2;
+}
+.social-icons .si-instagram:hover svg {
+  fill: #e4405f;
 }
 .social-icons .si-github:hover svg {
   fill: #181717;
@@ -249,6 +269,73 @@ main {
   margin-top: var(--content-gap);
 }
 
+/* Figures (photo credits on About) */
+figure {
+  margin: var(--content-gap) 0;
+}
+
+figcaption {
+  color: var(--secondary);
+  font-size: 14px;
+  text-align: center;
+  margin-top: 8px;
+}
+
+/* Archives */
+.archive-year > h2 {
+  font-size: 40px;
+  color: var(--secondary);
+  margin-bottom: 0;
+}
+
+.archive-month {
+  border-top: 1px solid var(--border);
+  padding-block: 12px;
+}
+
+.archive-month h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--secondary);
+}
+
+.archive-count {
+  font-size: 14px;
+}
+
+.archive-count::before {
+  content: "(";
+}
+.archive-count::after {
+  content: ")";
+}
+
+.archive-month ul {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+}
+
+.archive-month li {
+  display: flex;
+  gap: 12px;
+  padding-block: 4px;
+}
+
+.archive-month time {
+  color: var(--secondary);
+  font-size: 15px;
+  min-width: 60px;
+}
+
+.archive-month a {
+  color: var(--primary);
+}
+
 /* Footer */
 .footer {
   flex-shrink: 0;
@@ -257,6 +344,20 @@ main {
   font-size: 14px;
   text-align: center;
   padding: 20px var(--gap);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer .social-icons {
+  margin-top: 0;
+}
+
+.footer .social-icons svg {
+  /* Matches the Hugo theme's custom.css override. */
+  width: 18px;
+  height: 18px;
 }
 
 .footer a {

@@ -13,8 +13,11 @@ const dateFmt = new Intl.DateTimeFormat("en-US", {
 });
 ---
 
-<BaseLayout title="Blog">
-  <h1>Blog</h1>
+<BaseLayout
+  title="Posts"
+  description="Blogging about tech, entrepreneurship and life"
+>
+  <h1>Posts</h1>
   {
     posts.map((post) => (
       <article class="post-entry">
@@ -26,7 +29,7 @@ const dateFmt = new Intl.DateTimeFormat("en-US", {
             {dateFmt.format(post.data.date)}
           </time>
         </div>
-        {post.data.excerpt && <p>{post.data.excerpt}</p>}
+        {post.data.summary && <p>{post.data.summary}</p>}
       </article>
     ))
   }

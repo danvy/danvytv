@@ -21,7 +21,12 @@ const dateFmt = new Intl.DateTimeFormat("en-US", {
 });
 ---
 
-<BaseLayout title={post.data.title} description={post.data.excerpt}>
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description ?? post.data.summary}
+  ogType="article"
+  publishedDate={post.data.date}
+>
   <article data-pagefind-body>
     <h1 class="post-title">{post.data.title}</h1>
     <div class="post-meta">
